@@ -15,14 +15,8 @@ class _FirstScreenState extends State<FirstScreen> {
 
   @override
   void dispose() {
-    print(" title  ${title.text}   body ${body.text}");
-
-    title.clear();
-    body.clear();
     title.dispose();
     body.dispose();
-
-    print(" title  ${title.text}   body ${body.text}");
 
     // TODO: implement dispose
     super.dispose();

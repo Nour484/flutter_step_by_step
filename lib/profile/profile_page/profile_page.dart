@@ -1,7 +1,33 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class ProfilePage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  ImagePicker imagePicker = ImagePicker();
+
+  File? selectedImage;
+
+  Future<void> imageSelector(  ImageSource   source) async {
+    XFile? image = await imagePicker.pickImage(source: source);
+
+    if (image != null  && mounted) {
+
+
+       setState(() {
+         selectedImage = File(image!.path);
+       });
+
+
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +42,22 @@ class ProfilePage extends StatelessWidget {
             alignment: Alignment.bottomRight,
             children: [
               CircleAvatar(
-                backgroundColor: Colors.grey.shade500,
-                radius: 100,
-                child: Icon(
-                  Icons.person,
-                  size: 200,
-                  color: Colors.white38,
-                ),
-              ),
+                  backgroundColor: Colors.grey.shade500,
+                  radius: 100,
+                  child: selectedImage == null
+                      ? Icon(
+                          Icons.person,
+                          size: 200,
+                          color: Colors.white38,
+                        )
+                      : ClipOval(child: Image.file(
+
+                    height:  200,
+                       width:  200,
+                       fit: BoxFit.cover,
+
+
+                      selectedImage!))),
               CircleAvatar(
                   backgroundColor: Colors.black,
                   radius: 25,
@@ -32,20 +66,51 @@ class ProfilePage extends StatelessWidget {
                         showModalBottomSheet(
                             context: context,
                             builder: (context) => SizedBox(
-                              height: 150,
+                                  height: 150,
                                   child: Column(
                                     children: [
-                                      Text("Profile "  , style:  TextStyle(fontSize: 25),),
+                                      Text(
+                                        "Profile ",
+                                        style: TextStyle(fontSize: 25),
+                                      ),
                                       Divider(),
                                       Row(
-
-                                        mainAxisAlignment: MainAxisAlignment .spaceEvenly,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
                                         children: [
+                                          Options(
+                                            onPressed: () {
+                                              imageSelector( ImageSource.camera);
+                                              Navigator.pop(context) ;
+                                            },
+                                            title: "Camera",
+                                            icon: Icons.camera_alt,
+                                          ),
+                                          Options(
+                                            onPressed: () {
 
-                                          Options(title:  "Camera",  icon:  Icons.camera_alt,) ,
-                                          Options(title:  "Gallery",  icon:  Icons.image,) ,
-                                          Options(title:  "delete",  icon:  Icons.delete,) ,
+                                              imageSelector( ImageSource.gallery);
 
+                                              Navigator.pop(context) ;
+                                            },
+                                            title: "Gallery",
+                                            icon: Icons.image,
+                                          ),
+                                       if(selectedImage != null)
+                                              Options( selectedImage: selectedImage,
+
+                                                onPressed: () {
+
+                                                  if (mounted) {
+                                                    setState(() {
+                                                      selectedImage = null;
+                                                    });
+                                                  }
+                                                  Navigator.pop(context) ;
+                                                },
+                                                title:  "delete",
+                                                icon: Icons.delete,
+                                              ),
 
                                         ],
                                       )
@@ -60,49 +125,59 @@ class ProfilePage extends StatelessWidget {
                       )))
             ],
           ))
-        ],
+       ,
+        ListTile(
+           title: Text("Name "), 
+          subtitle: Text("Nour Ahmed "),
+          leading:  Icon(Icons.person),
+
+        ),
+          ListTile(
+            title: Text("Bio "),
+            subtitle: Text("Code. Sleep. Eat. Repeat "),
+            leading:  Icon(Icons.info),
+
+          )
+
+         ],
       ),
     );
   }
 }
 
+class Options extends StatelessWidget {
+  final String title;
 
+  final IconData icon;
 
+  Colors? color;
 
+   File ? selectedImage;
 
+  VoidCallback onPressed;
 
-   class Options extends StatelessWidget {
+  Options(
+      {required this.onPressed,
+      this.color,
 
+        this.selectedImage,
+      required this.title,
+      required this.icon,
+      super.key});
 
-  final String title ;
- final  IconData icon ;
-
-    Colors ? color ;
-
-
-
-
-
-       Options({ this.color ,  required  this.title , required this.icon ,   super.key});
-
-     @override
-     Widget build(BuildContext context) {
-       return  Column(
-         children: [
-           IconButton(
-               onPressed: () {},
-               icon: Icon(icon   , )),
-           Text(title)
-         ],
-       ) ;
-     }
-   }
-
-
-
-
-
-
-
-
-
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        IconButton(
+          color:  selectedImage == null? Colors.grey.shade800: Colors.red,
+          icon: Icon(
+            icon,
+          ),
+          onPressed: onPressed,
+        ),
+        Text(title   , style:  TextStyle(color:  selectedImage == null?  Colors.grey.shade800 : Colors.red), )
+      ],
+    );
+  }
+}
