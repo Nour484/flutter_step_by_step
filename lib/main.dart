@@ -4,7 +4,8 @@ import 'first_screen.dart';
 import 'home/home_screen/home_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  print ("Naour") ;
+ // runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

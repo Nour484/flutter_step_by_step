@@ -1,5 +1,2 @@
-
-
-
- export 'favorite.dart';
+export 'favorite.dart';
 export 'season.dart';
