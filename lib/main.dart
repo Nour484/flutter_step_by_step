@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
-
-import 'first_screen.dart';
+import 'package:flutter_for_beginners/profile/user_model.dart';
+ import 'package:provider/provider.dart';
 import 'home/home_screen/home_page.dart';
 
 void main() {
-  print ("Naour") ;
- // runApp(const MyApp());
+
+  runApp(
+
+    ChangeNotifierProvider(create: (context) => UserModel()  ,
+      child:  const MyApp(),
+
+    )
+
+
+
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +24,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-    //  showSemanticsDebugger: true,
+      debugShowCheckedModeBanner: false,
+      //  showSemanticsDebugger: true,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
