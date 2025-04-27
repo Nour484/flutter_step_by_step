@@ -1,93 +1,86 @@
-# Types of Constructors in Dart  final vs const
+## 🎬 Demo
+## 📹Play List
 
-## Generative Constructors
-Generative constructors are used to create instances of a class.
-```dart
-class Point {
-  double x;
-  double y;
+[![مشاهدة الفيديو على يوتيوب](https://img.youtube.com/vi/uKldicP6wms/0.jpg)](https://www.youtube.com/playlist?list=PLOH7xdwV7IorDoScahYwOf_WEPl77WRBz)
 
-  // Generative constructor with initializing formal parameters:
-  Point(this.x, this.y);
-}
-```
+> اضغط على الصورة لمشاهدة الشرح الكامل على YouTube.
+ ---
 
-## Default Constructors
-If no constructor is declared, Dart provides a default constructor, which is a generative constructor without arguments or names.
 
-## Named Constructors
-Named constructors allow a class to have multiple constructors or provide extra clarity.
-```dart
-const double xOrigin = 0;
-const double yOrigin = 0;
+1. [First video](https://www.youtube.com/watch?v=WdZChmqtzQI)
 
-class Point {
-  final double x;
-  final double y;
+   ```
+   - Stateless widget
+     - Text
+     - Icon
+     - Image from assets
+   
+   ```
 
-  // Sets the x and y instance variables before the constructor body runs.
-  Point(this.x, this.y);
+   ---
 
-  // Named constructor
-  Point.origin() : x = xOrigin, y = yOrigin;
-}
-```
+2. [second video](https://www.youtube.com/watch?v=clkP7hQQoHI&t=1s)
+   
+   ```
+   - Stateful widget
+     - SetState
+     - dispose 
+     - controller
+   ```
+   ---
+    
+3. [Third video](https://www.youtube.com/watch?v=NajvtGSZPng&t=10s)
 
-## Constant Constructors
-Constant constructors are used for classes that produce immutable objects.
-```dart
-class ImmutablePoint {
-  static const ImmutablePoint origin = ImmutablePoint(0, 0);
+   ```
+   - null-aware operator
+     - ??
+     - .? 
+     - .!
+   ```
+   ---
 
-  final double x, y;
+4.  [Forth video](https://www.youtube.com/watch?v=iCSNGXXHzOA&t=3s)
 
-  const ImmutablePoint(this.x, this.y);
-}
-```
+   ```
+    - profile screen
+      - bottom model sheet
+      - ternary operator
+   ```
+  ---
 
-## Redirecting Constructors
-A constructor may redirect to another constructor in the same class using `this`.
-```dart
-class Point {
-  double x, y;
+5.   [Fifth video](https://www.youtube.com/watch?v=C_SkHgiYyI8&t=3s)
 
-  // The main constructor for this class.
-  Point(this.x, this.y);
+   ```
+    - Image Picker plugin
+      - Pick single image
+      - Future - async - await
+      - mounted
+   
+   ```
+  ---  
+6.   [sixth video](https://www.youtube.com/watch?v=uKldicP6wms&t=1s)
 
-  // Redirecting constructor.
-  Point.alongXAxis(double x) : this(x, 0);
-}
-```
+   ```
+    - Image Picker plugin
+      - Pick Multi images
+      - ListView
+      - GridView .builder
+      
+   
+   ```
+  ---  
+  
 
-## Factory Constructors
-Factory constructors are used when:
-- The constructor does not always create a new instance.
-- Additional processing is needed before instantiation.
-```dart
-class Logger {
-  final String name;
-  bool mute = false;
 
-  factory Logger.fromJson(Map<String, Object> json) {
-    return Logger(json['name'].toString());
-  }
+## 📬 :
 
-  Logger._internal(this.name);
 
-  void log(String msg) {
-    if (!mute) print(msg);
-  }
-}
+- [YouTube  - Nour Ahmed](https://www.youtube.com/@Flutter_With_NourAhmed)
+- [GitHub   - Nour Ahmed](https://github.com/Nour484)
+- [LinkedIn - Nour Ahmed](https://www.linkedin.com/in/nour-ahmed404/) 
 
-// Usage
-var logger = Logger('UI');
-logger.log('Button clicked');
+---
 
-var logMap = {'name': 'UI'};
-var loggerJson = Logger.fromJson(logMap);
-```
 
-### Note:
-- Factory constructors cannot access `this`.
-- They can return an existing instance or a new instance of a subtype.
+
 
