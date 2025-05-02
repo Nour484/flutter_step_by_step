@@ -1,12 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_for_beginners/add_item/item_model.dart';
+import 'package:flutter_for_beginners/dashboard/dashboard_screen.dart';
 import 'package:flutter_for_beginners/profile/user_model.dart';
 import 'package:provider/provider.dart';
 
-import 'home/home_screen/home_page.dart';
+import 'details/details_screen/details_page.dart';
+
 
 void main() {
-  runApp(ChangeNotifierProvider(
-      create: (context) => UserModel(), child: const MyApp()));
+  runApp(
+
+      MultiProvider(
+        providers: [
+
+          ChangeNotifierProvider(
+          create: (context) => UserModel(),) ,
+          ChangeNotifierProvider(
+            create: (context) => ItemModel(),)
+
+
+
+        ],
+  child: const MyApp()
+
+      ));
+
+
+
+
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +43,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
-      home: MyHomePage(),
+      home: DashboardScreen(),
     );
   }
 }
