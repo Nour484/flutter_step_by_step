@@ -4,7 +4,9 @@ import 'package:flutter_for_beginners/dashboard/dashboard_screen.dart';
 import 'package:flutter_for_beginners/profile/user_model.dart';
 import 'package:provider/provider.dart';
 
+import 'dashboard/nav_bar.dart';
 import 'details/details_screen/details_page.dart';
+import 'favorite/favorite_model.dart';
 
 
 void main() {
@@ -16,7 +18,9 @@ void main() {
           ChangeNotifierProvider(
           create: (context) => UserModel(),) ,
           ChangeNotifierProvider(
-            create: (context) => ItemModel(),)
+            create: (context) => ItemModel(),) ,
+          ChangeNotifierProvider(
+            create: (context) => FavoriteModel(),)
 
 
 
@@ -43,7 +47,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
-      home: DashboardScreen(),
+      home: NavBar(),
     );
   }
 }

@@ -60,7 +60,7 @@ class DetailsPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              FavoriteWidget(),
+              FavoriteWidget( index:  items.items.indexOf(items.selectedItem!) ,),
               IconButton(onPressed: () {}, icon: Icon(Icons.share)),
             ],
           ),
