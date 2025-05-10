@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_for_beginners/qoute/qoute_screen.dart';
 
 import '../favorite/favorite_screen.dart';
 import '../profile/profile_page/profile_page.dart';
@@ -19,6 +20,7 @@ class _NavBarState extends State<NavBar> {
     return Scaffold(
       body: [
         DashboardScreen(),
+        QuoteScreen() ,
         FavoriteScreen(),
         ProfilePage(),
       ][_selectedIndex],
@@ -31,6 +33,10 @@ class _NavBarState extends State<NavBar> {
           destinations: [
             NavigationDestination(
                 icon: Icon(Icons.dashboard), label: "dashboard"),
+
+            NavigationDestination(
+                icon: Icon(Icons.format_quote), label: "Quote"),
+
             NavigationDestination(
                 icon: Icon(Icons.favorite), label: "favorite"),
             NavigationDestination(icon: Icon(Icons.person), label: "Profile ")
